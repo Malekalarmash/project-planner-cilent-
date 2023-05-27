@@ -80,6 +80,7 @@ export default function UpdateProject(props) {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
+                className='modal'
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Modal title</Modal.Title>

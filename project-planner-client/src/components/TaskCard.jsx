@@ -2,11 +2,12 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-export default function TaskCard() {
+export default function TaskCard({ task }, props) {
+    console.log("++++++", task)
     return (
         <Card className='mt-2' >
             <Card.Body>
-                <Card.Title> Task Title</Card.Title>
+                <Card.Title></Card.Title>
                 <Card.Text>
                     Card Description
                 </Card.Text>

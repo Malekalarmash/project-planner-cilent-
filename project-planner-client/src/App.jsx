@@ -11,6 +11,7 @@ import {
 import Projects from './pages/Projects';
 import Clients from './pages/Clients';
 import Tasks from './pages/Tasks';
+import UserRegiser from './pages/UserRegiser';
 function App() {
   return (
     // npm create vite@latest
@@ -28,6 +29,8 @@ function App() {
               <Route path="/clients" element={<Clients />} exact>
               </Route>
               <Route path="/tasks" element={<Tasks />} exact>
+              </Route>
+              <Route path="/signup" element={<UserRegiser />} exact>
               </Route>
             </Routes>
           </Col>
