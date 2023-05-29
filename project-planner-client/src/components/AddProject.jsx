@@ -1,7 +1,10 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function AddProject(props) {
@@ -9,11 +12,13 @@ export default function AddProject(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const { setData } = props
+    console.log("props", props)
 
     const [projectName, setProjectName] = useState('')
     const [projectBudget, setProjectBudget] = useState('')
     const [projectTimeline, setProjectTimeline] = useState('')
     const [projectDes, setProjectDes] = useState('')
+    const [sueccess, setSuccess] = useState(false)
 
     const handleProjectName = (input) => {
         setProjectName(input)
@@ -37,24 +42,26 @@ export default function AddProject(props) {
             timeline: projectTimeline
         }
         try {
-            await fetch('http://localhost:3500/projects', {
+            const response = await fetch('http://localhost:3500/projects', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
             })
-                .then(response => response.json())
-                // Stores the object into the variable called data
-                .then(data => {
-                    let updatedProjectInfo = {
-                        data
-                    }
-                    setData(false)
-                    // dispatch(setProject(data))
-                    // return projects
-                })
+            if (response.ok) {
+                const data = await response.json()
+                setData(false)
+                setSuccess(true)
+                toast.success('Project was created successfully');
+                setShow(false);
+
+            } else {
+                toast.error('Failed to submit form');
+            }
+            // Stores the object into the variable called data
 
         } catch (error) {
             console.error(error)
+            toast.error('An error occurred');
 
         }
     }
@@ -92,8 +99,8 @@ export default function AddProject(props) {
                         </Modal.Footer>
                     </form>
                 </Modal.Body>
-
             </Modal>
+            <ToastContainer />
         </>
     );
 }

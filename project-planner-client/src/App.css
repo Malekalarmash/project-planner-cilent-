@@ -43,3 +43,21 @@
 .read-the-docs {
   color: #888;
 }
+
+.modal form input {
+  background-color: white;
+  color: black;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  border-radius: 5px;
+  margin-left: 20px;
+  width: 50%;
+  display: flex;
+  border: #888 solid 1px;
+
+
+}
+
+.dropdown {
+  margin-top: 20px;
+}

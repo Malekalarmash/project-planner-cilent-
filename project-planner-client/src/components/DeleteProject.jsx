@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { updateProject } from '../redux/actions';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 
 
@@ -23,30 +27,33 @@ export default function DeleteProject(props) {
             id: projectFilter.id
         }
         try {
-            await fetch('http://localhost:3500/projects', {
+
+            const response = await fetch('http://localhost:3500/projects', {
                 method: 'DELETE',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
             })
-                .then(response => response.json())
-                // Stores the object into the variable called data
-                .then(data => {
-                    let updatedProjectInfo = {
-                        data
-                    }
-                    setData(false)
-                    handleClose()
-                    window.alert("Project was deleted")
-                    // dispatch(setProject(data))
-                    // return projects
-                })
+            if (response.ok) {
+                const data = await response.json()
+                setData(false)
+                toast.success(`project was deleted`);
+                setShow(false)
+
+            } else {
+                toast.error('Failed to submit form');
+
+            }
+            // Stores the object into the variable called data
         }
         catch (error) {
             console.error(error)
+            toast.error('An error occurred');
+
 
         }
 
     }
+
 
     return (
         <>
@@ -73,6 +80,7 @@ export default function DeleteProject(props) {
                     </form>
                 </Modal.Body>
             </Modal>
+            <ToastContainer />
         </>
 
     )

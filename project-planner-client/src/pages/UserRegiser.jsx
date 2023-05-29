@@ -4,24 +4,26 @@ import Modal from 'react-bootstrap/Modal';
 
 
 export default function UserRegiser() {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [psw, setPsw] = useState('')
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [psw, setPsw] = useState('')
 
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log('In the handlesubmit')
         let bodyData = {
             name: name,
             emailAddress: email,
             password: psw
         }
         try {
-            await fetch('http://localhost:3500/users', {
+            await fetch('http://localhost:3500/signup', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
@@ -40,7 +42,7 @@ export default function UserRegiser() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Sign Up
+                Create Account
             </Button>
 
             <Modal
@@ -50,10 +52,11 @@ export default function UserRegiser() {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Title>Sign Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={handleSubmit}>
+
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <label>Name
                             <input required value={name} type='text' onChange={(e) => setName(e.target.value)}>
                             </input>
@@ -67,15 +70,16 @@ export default function UserRegiser() {
                             </input>
                         </label>
                         <Modal.Footer>
-                            <Button type='submit' variant="primary">Create</Button>
-
+                            <Button type='submit' variant="primary">Create User</Button>
                         </Modal.Footer>
+
+
                     </form>
-
-
                 </Modal.Body>
-
             </Modal>
+
+
+
 
 
         </>

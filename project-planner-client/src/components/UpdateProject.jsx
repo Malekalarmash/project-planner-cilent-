@@ -5,6 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux'
 import { setProject } from '../redux/actions'
 import { updateProject } from '../redux/actions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 
 export default function UpdateProject(props) {
@@ -47,24 +51,25 @@ export default function UpdateProject(props) {
             timeline: projectTimeline
         }
         try {
-            await fetch('http://localhost:3500/projects', {
+            const response = await fetch('http://localhost:3500/projects', {
                 method: 'PUT',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
             })
-                .then(response => response.json())
-                // Stores the object into the variable called data
-                .then(data => {
-                    let updatedProjectInfo = {
-                        data
-                    }
-                    setData(false)
-                    // dispatch(setProject(data))
-                    // return projects
-                })
+            if (response.ok) {
+                const data = await response.json()
+                setData(false)
+                toast.success('Project was updated successfully');
+                setShow(false);
+            } else {
+                toast.error('Failed to submit form');
+
+            }
         }
         catch (error) {
             console.error(error)
+            toast.error('An error occurred');
+
 
         }
     }
@@ -108,6 +113,7 @@ export default function UpdateProject(props) {
                     </form>
                 </Modal.Body>
             </Modal>
+            <ToastContainer />
         </>
     )
 }

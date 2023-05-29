@@ -5,6 +5,12 @@ export function setProject(projectName) {
         payload: projectName
     }
 }
+export function setTask(tasks) {
+    return {
+        type: 'SET_TASK',
+        payload: tasks
+    }
+}
 export function updateProject(updatedProject) {
     return {
         type: 'UPDATE_PROJECT',
@@ -27,5 +33,12 @@ export function updateClient(updatedClient) {
     return {
         type: 'UPDATE_CLIENT',
         payload: updatedClient
+    }
+}
+export function setLoggedIn(isloggedIn) {
+    console.log("IS LOGGED IN", isloggedIn)
+    return {
+        type: 'SET_TOKEN',
+        payload: isloggedIn
     }
 }

@@ -6,14 +6,21 @@ let intialProject =
     projectName: [],
     updatedProject: [],
     deletedProject: [],
-    projectClients: []
+    projectClients: [],
+
 }
 let intialClient =
 {
     clientInfo: [],
     updatedClient: []
+}
+let intialTask =
+{
+    tasks: []
 
 }
+let isloggedIn = false
+
 export function projectSearch(state = intialProject, action) {
     switch (action.type) {
         case 'SET_PROJECT':
@@ -51,6 +58,36 @@ export function clientSearch(state = intialClient, action) {
                 updatedClient: action.payload
             }
 
+        default:
+            return (
+                state
+            )
+    }
+
+}
+export function taskSearch(state = intialTask, action) {
+    switch (action.type) {
+        case 'SET_TASK':
+            return {
+                ...state,
+                tasks: action.payload
+            }
+
+        default:
+            return (
+                state
+            )
+    }
+
+}
+export function setLogIn(state = isloggedIn, action) {
+    console.log("Payload", action.payload)
+    switch (action.type) {
+        case 'SET_TOKEN':
+            return {
+                ...state,
+                isloggedIn: action.payload
+            }
         default:
             return (
                 state

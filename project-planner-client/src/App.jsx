@@ -1,42 +1,28 @@
 import './App.css'
-import NavBar from './components/NavBar';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BrowserRouter as Router,
-  Route, Routes
-} from 'react-router-dom'
-import Projects from './pages/Projects';
-import Clients from './pages/Clients';
-import Tasks from './pages/Tasks';
-import UserRegiser from './pages/UserRegiser';
-function App() {
-  return (
-    // npm create vite@latest
+import Home from './pages/Home';
+import { setLoggedIn } from './redux/actions'
+import { useSelector } from 'react-redux';
+import Signin from './pages/signin';
+import DashboardImg from '../src/img/Dashboard.svg'
 
-    <Container className='container mt-5 ' >
-      <Router>
-        <Row >
-          <Col sm={3} >
-            <NavBar />
-          </Col>
-          <Col className='d-felx align-items-center ' sm={9} style={{ height: '100%' }}>
-            <Routes>
-              <Route path="/projects" element={<Projects />} exact>
-              </Route>
-              <Route path="/clients" element={<Clients />} exact>
-              </Route>
-              <Route path="/tasks" element={<Tasks />} exact>
-              </Route>
-              <Route path="/signup" element={<UserRegiser />} exact>
-              </Route>
-            </Routes>
-          </Col>
-        </Row>
-      </Router>
-    </Container>
+
+// Render compnent based on a state 
+// Usestate have or not have token 
+// If they dont have have a token, then it renders 
+// Landing page 
+// Home comp and if they have a token, then redirect to the home page
+// Dashboard comp renders in the App and if (toke) redirect to Home comp 
+function App() {
+  const loggedIn = useSelector((state) => state.setLogIn);
+  return (
+    <>
+      {loggedIn ? <Home /> :
+        <Signin />
+      }
+      <img className='dasboard-img' src={DashboardImg} alt="" />
+
+    </>
+
 
 
 
