@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 export default function TaskCard({ task }, props) {
-    console.log("++++++", task)
     return (
         <Card className='mt-2' >
             <Card.Body>

@@ -7,7 +7,7 @@ import { setLoggedIn } from '../redux/actions'
 import '../Signin.css'
 import UserRegiser from './UserRegiser'
 import { ToastContainer, toast } from 'react-toastify';
-
+import { setUser } from '../redux/actions'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -15,6 +15,7 @@ export default function signin() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const loggedIn = useSelector((state) => state.setLogIn);
+    const user = useSelector((state) => state.setUser);
     const [showSignUp, setShowSignUp] = useState(false);
 
     const handleSignUpClick = () => {
@@ -41,10 +42,11 @@ export default function signin() {
                 body: JSON.stringify(bodyData),
             })
             if (response.ok) {
-                const data = response.json()
+                const data = await response.json()
                 toast.success('User was logged in successfully');
                 localStorage.setItem("JWT", data.jwt);
                 dispatch(setLoggedIn(true))
+                dispatch(setUser(data.data.name))
             } else {
                 toast.error('Failed to submit form');
 
@@ -76,10 +78,6 @@ export default function signin() {
                 )}
             </div>
             <ToastContainer />
-
         </>
-
-
-
     )
 }

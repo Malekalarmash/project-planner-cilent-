@@ -72,16 +72,9 @@ export default function UserRegiser() {
                         <Modal.Footer>
                             <Button type='submit' variant="primary">Create User</Button>
                         </Modal.Footer>
-
-
                     </form>
                 </Modal.Body>
             </Modal>
-
-
-
-
-
         </>
 
     )

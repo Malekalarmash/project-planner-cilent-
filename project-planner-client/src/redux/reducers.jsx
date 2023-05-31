@@ -16,10 +16,11 @@ let intialClient =
 }
 let intialTask =
 {
-    tasks: []
-
+    tasks: [],
+    updatedTask: []
 }
 let isloggedIn = false
+let user = []
 
 export function projectSearch(state = intialProject, action) {
     switch (action.type) {
@@ -72,6 +73,11 @@ export function taskSearch(state = intialTask, action) {
                 ...state,
                 tasks: action.payload
             }
+        case 'UPDATE_TASK':
+            return {
+                ...state,
+                updatedTask: action.payload
+            }
 
         default:
             return (
@@ -81,12 +87,25 @@ export function taskSearch(state = intialTask, action) {
 
 }
 export function setLogIn(state = isloggedIn, action) {
-    console.log("Payload", action.payload)
     switch (action.type) {
         case 'SET_TOKEN':
             return {
                 ...state,
                 isloggedIn: action.payload
+            }
+        default:
+            return (
+                state
+            )
+    }
+
+}
+export function setUser(state = user, action) {
+    switch (action.type) {
+        case 'SET_USER':
+            return {
+                ...state,
+                user: action.payload
             }
         default:
             return (

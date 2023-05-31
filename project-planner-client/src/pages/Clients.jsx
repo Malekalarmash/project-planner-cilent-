@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import DeleteClient from '../components/DeleteClient';
 import { updateClient } from '../redux/actions';
+import UpdateClient from '../components/UpdateClient';
 export default function Clients() {
     const dispatch = useDispatch()
     const [Data, setData] = useState(false)
@@ -57,7 +58,9 @@ export default function Clients() {
                         <th>Spending</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th>Task</th>
+                        <th>Delete</th>
+                        <th>edit</th>
+     
                     </tr>
                 </thead>
                 <tbody>
@@ -70,12 +73,11 @@ export default function Clients() {
                                 <td>{client.budget}</td>
                                 <td>{client.email}</td>
                                 <td>{client.address}</td>
-                                <td>{client.task}</td>
                                 <td>
                                     <span client={client} onClick={() => { handleClick(client) }}><DeleteClient setData={setData} /></span>
                                 </td>
                                 <td>
-                                    <span client={client} onClick={() => { handleClick(client) }}></span>
+                                    <span client={client} onClick={() => { handleClick(client) }}><UpdateClient setData={setData}/> </span>
                                 </td>
                             </tr>
 
@@ -85,7 +87,7 @@ export default function Clients() {
                 </tbody>
 
             </Table>
-            <AddClients />
+            <AddClients setData={setData} />
 
 
         </>

@@ -3,8 +3,14 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useSelector } from 'react-redux';
-export default function AddTask() {
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
+
+export default function AddTask(props) {
+    const { setData } = props
+    const dispatch = useDispatch()
     const clientSearch = useSelector((state) => {
         return state.clientSearch.clientInfo
     })
@@ -59,25 +65,29 @@ export default function AddTask() {
 
         }
         try {
-            await fetch('http://localhost:3500/tasks', {
+           const response = await fetch('http://localhost:3500/tasks', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
             })
-                .then(response => response.json())
-                // Stores the object into the variable called data
-                .then(data => {
-                    let newTask = {
-                        data
-                    }
-                    dispatch(setTaskName(data))
-                    return newTask
-                })
+            if(response.ok){
+                const data = await response.json()
+                console.log(data)
+                // dispatch(setTaskName(data))
+                toast.success(`Task was Created`);
+                setShow(false)
+                setData(false)
+
+            }else{
+                toast.error('Failed to submit form');
+            }       
 
         } catch (e) {
             console.log(e)
+            toast.error('An error occurred');
         }
     }
+
 
     return (
         <>
@@ -134,6 +144,7 @@ export default function AddTask() {
                 </Modal.Body>
 
             </Modal>
+            <ToastContainer />
         </>
     )
 }

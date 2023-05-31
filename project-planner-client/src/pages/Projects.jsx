@@ -56,7 +56,7 @@ export default function Projects() {
     // const handleDeleteClick = async (project) => {
     //     dispatch(deleteProject(project))
     // }
-    const search = async () => {
+ const search = async () => {
         if (jwt) {
             try {
                 await fetch('http://localhost:3500/projects')

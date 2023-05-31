@@ -36,10 +36,6 @@
   }
 }
 
-/* .card {
-  padding: 2em;
-} */
-
 .read-the-docs {
   color: #888;
 }
@@ -54,8 +50,6 @@
   width: 50%;
   display: flex;
   border: #888 solid 1px;
-
-
 }
 
 .dropdown {

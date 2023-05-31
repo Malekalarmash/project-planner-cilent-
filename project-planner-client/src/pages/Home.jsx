@@ -15,11 +15,21 @@ import Projects from '../pages/Projects';
 import Singin from '../pages/Signin';
 import Clients from '../pages/Clients';
 import Tasks from '../pages/Tasks';
+import Header from '../components/Header';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn } from '../redux/actions'
+import { Navigate } from "react-router-dom";
+
 export default function Home() {
     return (
         <div>
+            {/* Its not working, Sign out will set the isLoggedId to false but its not navigating to singin if LoggedIn = false */}
+
+            <Header/>
             <Container className='container mt-5 ' >
                 <Router>
+             
                     <Row >
                         <Col sm={3} >
                             <NavBar />
@@ -31,8 +41,6 @@ export default function Home() {
                                 <Route path="/projects" element={<Projects />} exact />
                                 <Route path="/clients" element={<Clients />} exact />
                                 <Route path="/tasks" element={<Tasks />} exact />
-
-
                             </Routes>
                         </Col>
                     </Row>

@@ -35,10 +35,23 @@ export function updateClient(updatedClient) {
         payload: updatedClient
     }
 }
+export function updateTask(updatedTask) {
+    return {
+        type: 'UPDATE_TASK',
+        payload: updatedTask
+    }
+}
+
+
 export function setLoggedIn(isloggedIn) {
-    console.log("IS LOGGED IN", isloggedIn)
     return {
         type: 'SET_TOKEN',
         payload: isloggedIn
+    }
+}
+export function setUser(user) {
+    return {
+        type: 'SET_USER',
+        payload: user
     }
 }

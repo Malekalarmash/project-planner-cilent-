@@ -2,8 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useSelector } from 'react-redux';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function AddClients() {
+export default function AddClients(props) {
+    const { setData } = props
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -13,6 +18,9 @@ export default function AddClients() {
     const [clientPhone, setClientPhone] = useState('')
     const [clientBudget, setClientBudget] = useState('')
     const [clientProject, setClientProject] = useState('')
+    const projectSearch = useSelector((state) => {
+        return state.projectSearch.projectName
+    })
     const handleClientName = (input) => {
         setClientName(input)
     }
@@ -45,14 +53,25 @@ export default function AddClients() {
         }
 
         try {
-            await fetch('http://localhost:3500/clients', {
+           const response =  await fetch('http://localhost:3500/clients', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData)
             })
+            if(response.ok){
+                const data = await response.json()                
+                toast.success('Client was created successfully');
+                setShow(false);
+                setData(false)
+
+            }else {
+                toast.error('Failed to submit form');
+            }
 
         } catch (error) {
             console.log(error)
+            toast.error('An error occurred');
+
 
         }
     }
@@ -78,9 +97,19 @@ export default function AddClients() {
                         <label>Client Name
                             <input required type="text" value={clientName} onChange={(e) => handleClientName(e.target.value)}></input>
                         </label>
-                        <label>Project Name
-                            <input required type="text" value={clientProject} onChange={(e) => handleClientProject(e.target.value)}></input>
+                        <label> Select Project
+                        <Dropdown onSelect={handleClientProject}>
+                            <Dropdown.Toggle id="dropdown-basic"  >
+                                 {clientProject}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu >
+                                {projectSearch.map((project) => (
+                                    <Dropdown.Item className='dropdown' id={project.id} eventKey={project.projectName}>{project.projectName}</Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
                         </label>
+                       
                         <label>Budget
                             <input required type='number' value={clientBudget} onChange={(e) => handleClientBudget(e.target.value)}></input>
                         </label>
@@ -104,6 +133,7 @@ export default function AddClients() {
                 </Modal.Body>
 
             </Modal>
+            <ToastContainer />
         </>
     );
 }

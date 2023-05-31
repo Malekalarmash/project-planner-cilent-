@@ -12,7 +12,6 @@ export default function AddProject(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const { setData } = props
-    console.log("props", props)
 
     const [projectName, setProjectName] = useState('')
     const [projectBudget, setProjectBudget] = useState('')
