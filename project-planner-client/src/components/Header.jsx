@@ -24,15 +24,15 @@ export default function Header() {
         <>
 
         <Navbar>
-        <Container className='mb-5'>
-          <Navbar.Brand href="#home">Project Planner</Navbar.Brand>
+        <Container >
+          <Navbar.Brand className='m-5' href="#home">Project Planner</Navbar.Brand>
           <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">{[user]}</a>
+          <Navbar.Collapse className="justify-content-end ">
+            <Navbar.Text className='m-3' >
+              Signed in as: {[user]}
             </Navbar.Text>
           </Navbar.Collapse>
-          <Button href='/signin' variant="danger" onClick={ handleLogOut}>sign out</Button>
+          <Button  href='/signin' variant="danger" onClick={ handleLogOut}>sign out</Button>
         </Container>
       </Navbar>
 

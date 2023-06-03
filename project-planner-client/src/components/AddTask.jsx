@@ -76,7 +76,7 @@ export default function AddTask(props) {
                 // dispatch(setTaskName(data))
                 toast.success(`Task was Created`);
                 setShow(false)
-                setData(false)
+                setData(true)
 
             }else{
                 toast.error('Failed to submit form');

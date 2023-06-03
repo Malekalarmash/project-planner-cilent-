@@ -7,11 +7,11 @@ import Search from './Search';
 import { setLogIn } from '../redux/reducers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import '../../src/Navbar.css'
 
 export default function NavBar() {
     const loggedIn = useSelector((state) => state.setLogIn);
     const dispatch = useDispatch()
-    console.log(loggedIn)
 
     return (
         <>
