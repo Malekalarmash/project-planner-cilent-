@@ -20,12 +20,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Tasks() {
   const taskFilter = useSelector((state) => {
-    return state.taskSearch.tasks.filter((task) => (!task.isDone && !task.inPro));
+    return state.taskSearch.tasks.filter((task) => (!task.isDone));
   });
   const taskIsDone = useSelector((state) => {
     return state.taskSearch.tasks.filter((task) => task.isDone);
   });
-  console.log('Task Filter', taskIsDone)
   const updatedTask = useSelector((state) => {
     return state.taskSearch.updatedTask;
   });
@@ -44,7 +43,7 @@ export default function Tasks() {
       const response = await fetch('http://localhost:3500/tasks');
       const data = await response.json();
       dispatch(setTask(data));
-      setData(true);
+      // setData(true);
     } catch (e) {
       console.log(e);
     }
@@ -94,7 +93,7 @@ const handleDelete = async (task)=>{
 
   useEffect(() => {
     getTasks();
-  }, [Data, isDone, isDeleted]);
+  }, [isDone, isDeleted, Data]);
 
 
   return (
@@ -123,6 +122,10 @@ const handleDelete = async (task)=>{
                     <Card.Text>
                       <b>Client:</b>
                       {task.client}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Due Date:</b>
+                      {task.dueDate}
                     </Card.Text>
                     <Button
                     key={task.id}

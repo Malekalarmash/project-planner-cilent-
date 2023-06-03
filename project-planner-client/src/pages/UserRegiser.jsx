@@ -4,8 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useEffect } from 'react';
-
-
+import '../signup.css'
 
 
 export default function UserRegiser() {
@@ -65,8 +64,7 @@ export default function UserRegiser() {
                     <Modal.Title>Sign Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
-                    <form onSubmit={(e) => handleSubmit(e)}>
+                    <form id="signup" onSubmit={(e) => handleSubmit(e)}>
                         <label>Name
                             <input required value={name} type='text' onChange={(e) => setName(e.target.value)}>
                             </input>

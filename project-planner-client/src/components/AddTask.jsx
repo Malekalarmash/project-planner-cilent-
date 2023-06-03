@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
+import { setTask } from '../redux/actions';
+import { useRef } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 export default function AddTask(props) {
     const { setData } = props
@@ -26,8 +31,9 @@ export default function AddTask(props) {
     const [isDone, setIsDone] = useState(false)
     const [isInProgress, setIsInProgress] = useState(false)
     const [project, setProject] = useState('')
-    const [dueDate, setDueDate] = useState('')
+    const [dueDate, setDueDate] = useState(null)
     const [description, setDescription] = useState('')
+    const dateInputRef = useRef(null)
 
     const handleTaskName = (input) => {
         setTaskName(input)
@@ -45,8 +51,10 @@ export default function AddTask(props) {
     const handleProject = (input) => {
         setProject(input)
     }
-    const handleDueDate = (input) => {
-        setDueDate(input)
+    const handleDueDate = (input) => {  
+        const date = new Date(input);
+  const formattedDate = date.toISOString().slice(0, 10);
+  setDueDate(formattedDate);
     }
     const handleDescription = (input) => {
         setDescription(input)
@@ -72,8 +80,6 @@ export default function AddTask(props) {
             })
             if(response.ok){
                 const data = await response.json()
-                console.log(data)
-                // dispatch(setTaskName(data))
                 toast.success(`Task was Created`);
                 setShow(false)
                 setData(true)
@@ -116,7 +122,7 @@ export default function AddTask(props) {
                             </Dropdown.Toggle>
                             <Dropdown.Menu >
                                 {clientSearch.map((client) => (
-                                    <Dropdown.Item className='dropdown' id={client.id} eventKey={client.clientName}>{client.clientName}</Dropdown.Item>
+                                    <Dropdown.Item key={client.id} className='dropdown' id={client.id} eventKey={client.clientName}>{client.clientName}</Dropdown.Item>
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
@@ -126,12 +132,15 @@ export default function AddTask(props) {
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {projectSearch.map((project) => (
-                                    <Dropdown.Item id={project.id} eventKey={project.projectName}>{project.projectName}</Dropdown.Item>
+                                    <Dropdown.Item key={project.id} id={project.id} eventKey={project.projectName}>{project.projectName}</Dropdown.Item>
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
                         <label>Due Date
-                            <input type='date' required value={dueDate} onChange={(e) => handleDueDate(e.target.value)}></input>
+                            <DatePicker 
+                            value={dueDate}
+                            onChange={(date) => handleDueDate(date)}
+                             />
                         </label>
                         <label>Description
                             <input type='text' required value={description} onChange={(e) => handleDescription(e.target.value)}></input>

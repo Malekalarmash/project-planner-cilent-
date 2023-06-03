@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export default function AddProject(props) {
@@ -26,7 +28,9 @@ export default function AddProject(props) {
         setProjectBudget(input)
     }
     const handleProjectTimeline = (input) => {
-        setProjectTimeline(input)
+        const date = new Date(input);
+        const formattedDate = date.toISOString().slice(0, 10);
+        setProjectTimeline(formattedDate)
     }
     const handleProjectDes = (input) => {
         setProjectDes(input)
@@ -88,7 +92,10 @@ export default function AddProject(props) {
                             <input type='number' required value={projectBudget} onChange={(e) => handleProjectBudget(e.target.value)}></input>
                         </label>
                         <label>Timeline
-                            <input type='date' required value={projectTimeline} onChange={(e) => handleProjectTimeline(e.target.value)}></input>
+                        <DatePicker 
+                            value={projectTimeline}
+                            onChange={(date) => handleProjectTimeline(date)}
+                             />
                         </label>
                         <label>Description
                             <input type='text' required value={projectDes} onChange={(e) => handleProjectDes(e.target.value)}></input>

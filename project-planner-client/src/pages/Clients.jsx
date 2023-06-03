@@ -16,7 +16,6 @@ export default function Clients() {
     const clientFilter = useSelector((state) => {
         return state.clientSearch.clientInfo
     })
-    console.log('In the clients page', clientFilter)
     const handleClick = async (client) => {
         dispatch(updateClient(client))
     }
@@ -31,7 +30,6 @@ export default function Clients() {
                         data
                     }
                     dispatch(setClient(data))
-                    console.log(clientFilter)
                     setData(true)
                     return clients
                 })
