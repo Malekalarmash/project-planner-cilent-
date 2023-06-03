@@ -20,7 +20,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from '../redux/actions'
 import { Navigate } from "react-router-dom";
-import Dashboard from '../img/Dashboard.svg'
 
 export default function Home() {
     return (

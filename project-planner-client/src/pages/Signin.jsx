@@ -9,7 +9,7 @@ import UserRegiser from './UserRegiser'
 import { ToastContainer, toast } from 'react-toastify';
 import { setUser } from '../redux/actions'
 import 'react-toastify/dist/ReactToastify.css';
-import Dashboard from '../img/Dashboard.svg'
+import Dashboard from '../assets/Dashboard.svg'
 
 export default function signin() {
     const [email, setEmail] = useState('')

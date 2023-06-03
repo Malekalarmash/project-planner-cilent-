@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import { setLoggedIn } from './redux/actions'
 import { useSelector } from 'react-redux';
 import Signin from './pages/signin';
-import DashboardImg from '../src/img/Dashboard.svg'
+
 
 
 // Render compnent based on a state 
