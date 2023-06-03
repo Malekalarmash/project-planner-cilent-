@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { useEffect } from 'react';
+
+
 
 
 export default function UserRegiser() {
@@ -16,29 +21,34 @@ export default function UserRegiser() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('In the handlesubmit')
         let bodyData = {
             name: name,
             emailAddress: email,
             password: psw
         }
         try {
-            await fetch('http://localhost:3500/signup', {
+           const response =  await fetch('http://localhost:3500/signup', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
             })
-                .then(response => response.json())
-                .then(data => {
-                    let userData = {
-                        data
-                    }
-                })
+            if(response.ok){
+                const data = await response.json()
+                toast.success('User was Created successfully');
+                setShow(false)
+
+            }else{
+                toast.error('Failed to submit form');
+
+            }
 
         } catch (error) {
             console.log(error)
+            toast.error('An error occurred');
+
         }
     }
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -75,6 +85,8 @@ export default function UserRegiser() {
                     </form>
                 </Modal.Body>
             </Modal>
+            <ToastContainer />
+
         </>
 
     )

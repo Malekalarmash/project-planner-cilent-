@@ -20,12 +20,11 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from '../redux/actions'
 import { Navigate } from "react-router-dom";
+import Dashboard from '../img/Dashboard.svg'
 
 export default function Home() {
     return (
         <div>
-            {/* Its not working, Sign out will set the isLoggedId to false but its not navigating to singin if LoggedIn = false */}
-
             <Header/>
             <Container className='container mt-5 ' >
                 <Router>
@@ -36,8 +35,6 @@ export default function Home() {
                         </Col>
                         <Col className='d-felx align-items-center ' sm={9} style={{ height: '100%' }}>
                             <Routes>
-                                <Route path="/signup" element={<UserRegiser />} exact />
-                                <Route path="/signin" element={<Singin />} exact />
                                 <Route path="/projects" element={<Projects />} exact />
                                 <Route path="/clients" element={<Clients />} exact />
                                 <Route path="/tasks" element={<Tasks />} exact />

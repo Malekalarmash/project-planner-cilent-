@@ -9,7 +9,7 @@ import UserRegiser from './UserRegiser'
 import { ToastContainer, toast } from 'react-toastify';
 import { setUser } from '../redux/actions'
 import 'react-toastify/dist/ReactToastify.css';
-
+import Dashboard from '../img/Dashboard.svg'
 
 export default function signin() {
     const [email, setEmail] = useState('')
@@ -47,20 +47,22 @@ export default function signin() {
                 localStorage.setItem("JWT", data.jwt);
                 dispatch(setLoggedIn(true))
                 dispatch(setUser(data.data.name))
-            } else {
+            } else if(response.json(error)) {
                 toast.error('Failed to submit form');
-
             }
 
         } catch (error) {
             console.log(error)
-            toast.error('An error occurred');
+            toast.error('Wrong email or password');
 
         }
     }
     return (
         <>
-            <div className='signin-container'>
+           <div className="background-image" style={{ backgroundImage: `url(${Dashboard})` }}></div>
+      <div className="signin-container"></div>
+        <div style={{backgroundImage: `url(${Dashboard})`}}></div>
+            <div className='signin-container' >
                 <p>Sign in or create a new account</p>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <label>Email

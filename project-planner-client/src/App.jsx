@@ -16,10 +16,9 @@ function App() {
   const loggedIn = useSelector((state) => state.setLogIn);
   return (
     <>
-      {loggedIn ? <Home /> :
-        <Signin />
-      }
-      <img className='dasboard-img' src={DashboardImg} alt="" />
+    
+      {loggedIn ? <Home /> : <Signin />}
+   
 
     </>
 
