@@ -88,7 +88,7 @@ export default function UpdateProject(props) {
                 className='modal'
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Title>Update Project</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {/* The submit btn should be inside the form but if its not, then we need  */}
