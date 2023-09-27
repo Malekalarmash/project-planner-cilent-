@@ -53,7 +53,7 @@ export default function AddClients(props) {
         }
 
         try {
-           const response =  await fetch('http://localhost:3500/clients', {
+           const response =  await fetch('https://project-planner-server-qqkm.onrender.com/clients', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData)

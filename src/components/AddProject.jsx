@@ -45,7 +45,7 @@ export default function AddProject(props) {
             timeline: projectTimeline
         }
         try {
-            const response = await fetch('http://localhost:3500/projects', {
+            const response = await fetch('https://project-planner-server-qqkm.onrender.com/projects', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),

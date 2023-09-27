@@ -26,7 +26,7 @@ export default function UserRegiser() {
             password: psw
         }
         try {
-           const response =  await fetch('http://localhost:3500/signup', {
+           const response =  await fetch('https://project-planner-server-qqkm.onrender.com/signup', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),

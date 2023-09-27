@@ -40,7 +40,7 @@ export default function Tasks() {
 
   const getTasks = async () => {
     try {
-      const response = await fetch('http://localhost:3500/tasks');
+      const response = await fetch('https://project-planner-server-qqkm.onrender.com/tasks');
       const data = await response.json();
       dispatch(setTask(data));
       // setData(true);

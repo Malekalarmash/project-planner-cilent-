@@ -22,7 +22,7 @@ export default function Clients() {
 
     const search = async () => {
         try {
-            await fetch('http://localhost:3500/clients')
+            await fetch('https://project-planner-server-qqkm.onrender.com/clients')
                 .then(response => response.json())
                 // Stores the object into the variable called data
                 .then(data => {

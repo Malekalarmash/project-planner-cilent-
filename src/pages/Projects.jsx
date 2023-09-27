@@ -59,7 +59,7 @@ export default function Projects() {
  const search = async () => {
         if (jwt) {
             try {
-                await fetch('http://localhost:3500/projects')
+                await fetch('https://project-planner-server-qqkm.onrender.com/projects')
                     .then(response => response.json())
                     // Stores the object into the variable called data
                     .then(data => {
